@@ -24,24 +24,17 @@ pub fn create_domain_inbox(domain: String) -> Result<Inbox, TempMailError> {
 pub fn get_inbox_emails(token: String) -> Result<Vec<Email>, TempMailError> {
     let url = format!("{BASE_URL}/auth/{token}");
     let data: EmailsResponse = reqwest::blocking::get(url)?.json()?;
-    if let Some(data) = data.email {
-        return Ok(data);
+    match data {
+        EmailsResponse::Error { .. } => Err(TempMailError::InvalidToken),
+        EmailsResponse::Success { email } => Ok(email),
     }
-
-    if let Some(msg) = data.token {
-        if msg == "invalid" {
-            return Err(TempMailError::InvalidDomain)
-        }
-    }
-
-    Ok(Vec::new())
 }
 
 pub fn get_custom_inbox_emails(domain: String, key: String) -> Result<Vec<Email>, TempMailError> {
     let url = format!("{BASE_URL}/custom/{key}/{domain}");
     let data: EmailsResponse = reqwest::blocking::get(url)?.json()?;
-    match data.email {
-        Some(data) => Ok(data),
-        None => Ok(Vec::new()),
+    match data {
+        EmailsResponse::Success { email } => Ok(email),
+        _ => Ok(Vec::new()),
     }
 }

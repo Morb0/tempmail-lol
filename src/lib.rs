@@ -35,9 +35,11 @@ pub struct Email {
 }
 
 #[derive(Debug, Deserialize)]
-struct EmailsResponse {
-    email: Option<Vec<Email>>,
-    token: Option<String>,
+#[serde(untagged)]
+enum EmailsResponse {
+    Success{ email: Vec<Email> },
+    #[allow(dead_code)]
+    Error { token: String }
 }
 
 #[derive(Debug, Error)]
