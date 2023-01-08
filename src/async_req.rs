@@ -9,7 +9,7 @@ pub async fn create_inbox_async() -> Result<Inbox, TempMailError> {
 
 pub async fn create_rush_inbox_async() -> Result<Inbox, TempMailError> {
     let url = format!("{BASE_URL}/generate/rush");
-    let data: Inobx = make_request(url).await?;
+    let data: Inbox = make_request(url).await?;
     Ok(data)
 }
 
@@ -17,8 +17,8 @@ pub async fn create_domain_inbox_async(domain: String) -> Result<Inbox, TempMail
     let url = format!("{BASE_URL}/generate/{domain}");
     let data: DomainInboxResponse = make_request(url).await?;
     match data {
-        DomainInboxResponse::Error => Err(TempMailError::InvalidDomain),
-        DomainInboxResponse::Success => data,
+        DomainInboxResponse::Error { .. } => Err(TempMailError::InvalidDomain),
+        DomainInboxResponse::Success { address, token } => Ok(Inbox { address, token }),
     }
 }
 
