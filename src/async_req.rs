@@ -14,7 +14,11 @@ pub async fn create_rush_inbox_async() -> Result<Inbox, TempMailError> {
 }
 
 pub async fn create_domain_inbox_async(domain: String) -> Result<Inbox, TempMailError> {
-    let url = format!("{BASE_URL}/generate/{domain}");
+    let trimmed = domain.trim();
+    if trimmed.is_empty() {
+        return Err(TempMailError::InvalidDomain);
+    }
+    let url = format!("{BASE_URL}/generate/{trimmed}");
     let data: DomainInboxResponse = make_request(url).await?;
     match data {
         DomainInboxResponse::Error { .. } => Err(TempMailError::InvalidDomain),

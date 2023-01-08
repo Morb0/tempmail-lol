@@ -13,7 +13,11 @@ pub fn create_rush_inbox() -> Result<Inbox, TempMailError> {
 }
 
 pub fn create_domain_inbox(domain: String) -> Result<Inbox, TempMailError> {
-    let url = format!("{BASE_URL}/generate/{domain}");
+    let trimmed = domain.trim();
+    if trimmed.is_empty() {
+        return Err(TempMailError::InvalidDomain);
+    }
+    let url = format!("{BASE_URL}/generate/{trimmed}");
     let data: DomainInboxResponse = reqwest::blocking::get(url)?.json()?;
     match data {
         DomainInboxResponse::Error { .. } => Err(TempMailError::InvalidDomain),
