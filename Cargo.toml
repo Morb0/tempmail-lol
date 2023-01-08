@@ -1,5 +1,5 @@
 [package]
-name = "tempmail_lol"
+name = "tempmail-lol"
 version = "0.1.0"
 edition = "2021"
 description = "API to generate temporary email addresses"
