@@ -5,7 +5,7 @@ Crate API wrapper for [TempMail.lol](https://tempmail.lol) service.
 Install from [crates.io](https://crates.io). Add the following line to your Cargo.toml file's dependencies section:
 ```toml
 [dependencies]
-tempmail_lol = "0.1"
+tempmail-lol = "0.1"
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ fn main() -> Result<(), tempmail_lol::TempMailError> {
 For async functions you need to use `async` feature flag:
 ```toml
 [dependencies]
-tempmail_lol = { version = "0.1", features = ["async"] }
+tempmail-lol = { version = "0.1", features = ["async"] }
 ```
 And then use any async runtime:
 ```rust
