@@ -17,7 +17,7 @@ pub fn create_domain_inbox(domain: String) -> Result<Inbox, TempMailError> {
     let data: DomainInboxResponse = reqwest::blocking::get(url)?.json()?;
     match data {
         DomainInboxResponse::Error { .. } => Err(TempMailError::InvalidDomain),
-        DomainInboxResponse::Success { address, token } => Ok(Inbox { address, token }),
+        DomainInboxResponse::Success(inbox) => Ok(inbox),
     }
 }
 

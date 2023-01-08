@@ -18,13 +18,8 @@ pub struct Inbox {
 #[derive(Debug, Deserialize)]
 #[serde(untagged)]
 enum DomainInboxResponse {
-    Success {
-        address: String,
-        token: String,
-    },
-    Error {
-        error: String,
-    }
+    Success(Inbox),
+    Error { error: String }
 }
 
 #[derive(Debug, Deserialize)]

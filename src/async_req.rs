@@ -18,7 +18,7 @@ pub async fn create_domain_inbox_async(domain: String) -> Result<Inbox, TempMail
     let data: DomainInboxResponse = make_request(url).await?;
     match data {
         DomainInboxResponse::Error { .. } => Err(TempMailError::InvalidDomain),
-        DomainInboxResponse::Success { address, token } => Ok(Inbox { address, token }),
+        DomainInboxResponse::Success(inbox) => Ok(inbox),
     }
 }
 
