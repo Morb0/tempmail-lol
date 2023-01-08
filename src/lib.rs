@@ -19,6 +19,7 @@ pub struct Inbox {
 #[serde(untagged)]
 enum DomainInboxResponse {
     Success(Inbox),
+    #[allow(dead_code)]
     Error { error: String }
 }
 
