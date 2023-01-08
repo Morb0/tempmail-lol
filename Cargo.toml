@@ -7,6 +7,9 @@ license = "MIT"
 keywords = ["tempmail", "temporary-email", "temp-mail", "disposable", "disposable-email"]
 categories = ["api-bindings"]
 
+[badges]
+maintenance = { status = "passively-maintained" }
+
 [features]
 async = []
 
