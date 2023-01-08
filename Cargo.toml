@@ -6,7 +6,7 @@ description = "API to generate temporary email addresses"
 license = "MIT"
 keywords = ["tempmail", "temporary-email", "temp-mail", "disposable", "disposable-email"]
 categories = ["api-bindings"]
-repository = "https://github.com/Morb0/tempmail_lol"
+repository = "https://github.com/Morb0/tempmail-lol"
 
 [badges]
 maintenance = { status = "passively-maintained" }
